@@ -46,6 +46,7 @@ module Spree
         }})
 
       begin
+        Rails.logger.warn "set_express_checkout####pp_request.to_yaml: #{pp_request.to_yaml.inspect} - #{}###"
         pp_response = provider.set_express_checkout(pp_request)
         if pp_response.success?
           redirect_to provider.express_checkout_url(pp_response)

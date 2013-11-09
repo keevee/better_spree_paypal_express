@@ -54,7 +54,7 @@ module Spree
         }
       })
       Rails.logger.warn "####pp_request: #{pp_request.inspect} - #{}###"
-      Rails.logger.warn "####pp_request.to_yml: #{pp_request.to_yml} - #{}###"
+      Rails.logger.warn "do_express_checkout_payment####pp_request.to_yml: #{pp_request.to_yaml} - #{}###"
       pp_response = provider.do_express_checkout_payment(pp_request)
       if pp_response.success?
         # We need to store the transaction id for the future.

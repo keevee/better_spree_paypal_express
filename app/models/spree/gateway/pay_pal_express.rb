@@ -58,7 +58,7 @@ module Spree
               # international payment amounts. SMH.
               :value => ::Money.new(amount, Spree::Config[:currency]).to_s.gsub(',', '.') 
             },
-            :PaymentDetailsItem => pp_details_response.payment_details[0].payment_details_item
+            :PaymentDetailsItem => pp_details_response.PaymentDetails[0].PaymentDetailsItem
           }]
         }
       })

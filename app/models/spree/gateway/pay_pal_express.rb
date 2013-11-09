@@ -34,6 +34,13 @@ module Spree
     end
 
     def purchase(amount, express_checkout, gateway_options={})
+      pp_details_request = provider.build_get_express_checkout_details({
+        :Token => express_checkout.token
+      })
+      pp_details_response = provider.get_express_checkout_details(pp_details_request)
+
+      Rails.logger.warn "####pp_details_response: #{pp_details_response.inspect} - #{}###"
+
       pp_request = provider.build_do_express_checkout_payment({
         :DoExpressCheckoutPaymentRequestDetails => {
           :PaymentAction => "Sale",
@@ -49,7 +56,9 @@ module Spree
               # 21.99
               # The international payments company fails to handle
               # international payment amounts. SMH.
-              :value => ::Money.new(amount, Spree::Config[:currency]).to_s.gsub(',', '.') }
+              :value => ::Money.new(amount, Spree::Config[:currency]).to_s.gsub(',', '.') 
+            },
+            :PaymentDetailsItem => pp_details_response.payment_details[0].payment_details_item
           }]
         }
       })

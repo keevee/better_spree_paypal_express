@@ -10,9 +10,6 @@ module Spree
     preference :logourl, :string, default: ''
     preference :review, :boolean, default: false
 
-    attr_accessible :preferred_login, :preferred_password, :preferred_signature,
-                    :preferred_solution, :preferred_logourl, :preferred_landing_page, :preferred_review
-
     def supports?(source)
       true
     end
